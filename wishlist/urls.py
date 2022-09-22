@@ -1,5 +1,5 @@
 from django.urls import path
-from wishlist.views import show_wishlist, show_xml, show_json, return_data_json, return_data_xml
+from wishlist.views import *
 
 app_name = 'wishlist'
 
@@ -9,4 +9,7 @@ urlpatterns = [
     path('json/', show_json, name='show_json'),
     path('xml/<int:id>', return_data_xml, name="return_data_xml"),
     path('json/<int:id>', return_data_json, name="return_data_json"),
+    path('register/', register, name='register'),
+    path('login/', login_user, name='login_user'),
+    path('logout/', logout_user, name='logout_user'),
 ]
