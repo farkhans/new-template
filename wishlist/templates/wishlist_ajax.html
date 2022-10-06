@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $.get("{% url 'wishlist:show_json' %}", function(data){
+            $("#show").append("<tr><th>Nama Barang</th><th>Harga Barang</th><th>Deskripsi</th></tr>")
+            for (let i = 0; i < data.length; i++) {
+                var data_item = data[i].fields;
+                $("#show").append("<tr><td>" + data_item.nama_barang + "</td><td>" + data_item.harga_barang + "</td><td>" + data_item.deskripsi + "</td></tr>");
+            }
+        });
+    });
+</script>
+<h5>Nama: </h5>
+<p>{{nama}}</p>
+
+<table id="show">
+
+</table>
+
+<form>
+    <table>
+        <tr>
+            <td>Nama Barang: </td>
+            <td><input type="text" name="nama-barang" > </td>
+        </tr>
+        <tr>
+            <td>Harga Barang: </td>
+            <td><input type="text" name="harga-barang" > </td>
+        </tr>
+        <tr>
+            <td>Deskripsi: </td>
+            <td><input type="text" name="deskripsi" > </td>
+        </tr>
+    </table>
+</form>
+<h5>Sesi terakhir login: {{ last_login }}</h5>
+<button><a href="{% url 'wishlist:logout_user' %}">Logout</a></button>
+
+{% endblock content %}
